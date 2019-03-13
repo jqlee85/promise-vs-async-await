@@ -10,19 +10,26 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      word: false,
-      img: false
+      word1: false,
+      img1: false,
+      word2: false,
+      img2: false
     };  
   }
   
-
   componentDidMount(){
     
-    // this.getPromptsPromiseChain()
+    // Chaining Promises
+    this.getPromptsPromiseChain()
     
+    // Using Async/Await
     this.getPromptsAwait().
     then(results => {
-      this.setState(results)
+      // this.setState(results)
+      this.setState(prevState => ({
+        word2: results.word2,
+        img2: results.img2
+      }));
     });
   }
   
@@ -33,16 +40,16 @@ class App extends Component {
       .then(response => response.json())
       .then( json => {
         console.log(json.text)
-        this.setState({
-          word: json.text
-        })
+        this.setState(prevState => ({
+          word1: json.text,
+        }));
         return fetch(giphyAPI + encodeURI(json.text))
       })
       .then(response => response.json())
       .then( json => {
-        this.setState({
-          img: json.data[0].images['original']['url']
-        })
+        this.setState(prevState => ({
+          img1: json.data[0].images['original']['url'],
+        }));
       })
       .catch(err =>{
         console.error(err);
@@ -62,8 +69,8 @@ class App extends Component {
     let imgURL = imgjson.data[0].images['original']['url']
 
     return {
-      word: wordsjson.text,
-      img: imgURL
+      word2: phrase,
+      img2: imgURL
     }
   
   }
@@ -83,8 +90,10 @@ class App extends Component {
 
     return (
       <div className="App" style={styles}>
-        {this.state.word && <h1>{this.state.word}</h1> }
-        {this.state.img && <img src={this.state.img}/> }
+        {this.state.word1 && <h1>{this.state.word1}</h1> }
+        {this.state.img1 && <img style={{maxWidth:'100%',height:'auto'}} src={this.state.img1}/> }
+        {this.state.word2 && <h1>{this.state.word2}</h1> }
+        {this.state.img2 && <img style={{maxWidth:'100%',height:'auto'}} src={this.state.img2}/> }
       </div>
     );
   }
