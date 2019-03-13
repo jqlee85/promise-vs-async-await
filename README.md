@@ -1,3 +1,5 @@
+# Testing JavaScript Async/Await and Promises with The JumpWriter API and Giphy API
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
