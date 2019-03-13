@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 const jumpwriterAPI = 'https://api.jumpwriter.com/wp-json/jumpwriter-theme/v1/noun-verb-prompt/';
-const giphyAPI = 'https://api.giphy.com/v1/gifs/search?api_key=XKSIgL9gyVGH4R3w4LpkpiHRIvnIoAMv&limit=1&offset=0&rating=R&lang=en&q=';
+const giphyAPI1 = 'https://api.giphy.com/v1/gifs/search?api_key=XKSIgL9gyVGH4R3w4LpkpiHRIvnIoAMv&q=';
+const giphyAPI2 = '&limit=2&lang=en';
 
 class App extends Component {
   
@@ -43,7 +44,7 @@ class App extends Component {
         this.setState(prevState => ({
           word1: json.text,
         }));
-        return fetch(giphyAPI + encodeURI(json.text))
+        return fetch(giphyAPI1 + encodeURI(json.text) + giphyAPI2)
       })
       .then(response => response.json())
       .then( json => {
@@ -64,7 +65,7 @@ class App extends Component {
     let wordsjson = await words.json()
     let phrase = wordsjson.text
     console.log(phrase)
-    let img = await fetch(giphyAPI + encodeURI(phrase))
+    let img = await fetch(giphyAPI1 + encodeURI(phrase) + giphyAPI2)
     let imgjson = await img.json()
     let imgURL = imgjson.data[0].images['original']['url']
 
