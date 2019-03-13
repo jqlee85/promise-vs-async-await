@@ -94,9 +94,9 @@ class App extends Component {
         {this.state.word1 && <h1>{this.state.word1}</h1> }
         {this.state.img1 && <img style={{maxWidth:'100%',height:'auto'}} src={this.state.img1}/> }
         <br/>
-        <p>Async/Await</p>
+        {/* <p>Async/Await</p>
         {this.state.word2 && <h1>{this.state.word2}</h1> }
-        {this.state.img2 && <img style={{maxWidth:'100%',height:'auto'}} src={this.state.img2}/> }
+        {this.state.img2 && <img style={{maxWidth:'100%',height:'auto'}} src={this.state.img2}/> } */}
       </div>
     );
   }
