@@ -24,14 +24,13 @@ class App extends Component {
     this.getPromptsPromiseChain()
     
     // Using Async/Await
-    this.getPromptsAwait().
-    then(results => {
-      // this.setState(results)
-      this.setState(prevState => ({
-        word2: results.word2,
-        img2: results.img2
-      }));
-    });
+    // this.getPromptsAwait().
+    // then(results => {
+    //   this.setState(prevState => ({
+    //     word2: results.word2,
+    //     img2: results.img2
+    //   }));
+    // });
   }
   
   // Get Prompts via chain of promises
@@ -44,7 +43,7 @@ class App extends Component {
         this.setState(prevState => ({
           word1: json.text,
         }));
-        return fetch(giphyAPI1 + encodeURI(json.text) + giphyAPI2)
+        return fetch(giphyAPI1 + encodeURI(json.text) + giphyAPI2, {mode:'cors'})
       })
       .then(response => response.json())
       .then( json => {
@@ -65,7 +64,7 @@ class App extends Component {
     let wordsjson = await words.json()
     let phrase = wordsjson.text
     console.log(phrase)
-    let img = await fetch(giphyAPI1 + encodeURI(phrase) + giphyAPI2)
+    let img = await fetch(giphyAPI1 + encodeURI(phrase) + giphyAPI2, {mode:'cors'})
     let imgjson = await img.json()
     let imgURL = imgjson.data[0].images['original']['url']
 
